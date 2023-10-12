@@ -35,12 +35,12 @@ echo -e "\e[32mStep 3: Docker installed.\e[0m"
 echo "Step 3: Docker installed." >> "$log_file"
 
 # 安装git-lfs
-echo -e "\e[32mStep 4: Installing Git LFS...\e[0m"
-curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
-apt-get install git-lfs -y
-echo -e "\e[32mStep 4: Git LFS installed.\e[0m"
+#echo -e "\e[32mStep 4: Installing Git LFS...\e[0m"
+#curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+#apt-get install git-lfs -y
+#echo -e "\e[32mStep 4: Git LFS installed.\e[0m"
 # 保存步骤输出到步骤日志文件
-echo "Step 4: Git LFS installed." >> "$log_file"
+#echo "Step 4: Git LFS installed." >> "$log_file"
 
 # 第二步：安装 Emby
 echo -e "\e[32mStep 5: Installing Emby...\e[0m"
