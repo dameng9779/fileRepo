@@ -11,7 +11,7 @@ echo "" > "$config_file"
 
 # 第一步：升级软件源
 echo -e "\e[32mStep 1: Updating software sources...\e[0m"
-apt update -y && apt install -y curl wget sudo socat vim unzip fq git fuse3
+apt update -y && apt install -y curl wget sudo socat vim unzip jq git fuse3
 echo -e "\e[32mStep 1: Software sources updated and necessary tools installed.\e[0m"
 # 保存步骤输出到步骤日志文件
 echo "Step 1: Software sources updated and necessary tools installed." >> "$log_file"
