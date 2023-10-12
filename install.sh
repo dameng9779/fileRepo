@@ -1,5 +1,5 @@
 #!/bin/bash
-
+ufw disable
 # 记录脚本开始时间
 start_time=$(date +%s)
 
