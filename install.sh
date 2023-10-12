@@ -112,6 +112,26 @@ echo -e "\e[32mStep 11: Emby crack success\e[0m"
 echo -e "Step 11: Emby crack success and server restarted" >> "$log_file"
 
 # 创建emby账号 emby/emby
+# 定义服务名称
+service_name="emby-server"
+
+# 最长等待时间（以秒为单位）
+max_wait_time=20
+
+# 检查服务状态是否为 active
+if systemctl is-active --quiet $service_name; then
+    echo "Service $service_name is active."
+
+    # 等待 20 秒
+    sleep $max_wait_time
+
+    echo "Continuing with your action..."
+    # 在这里执行你的脚本或命令
+else
+    echo "Service $service_name is not active. Exiting..."
+    sleep 40
+fi
+
 chmod +x emby-init.sh
 x_emby_token=$(./emby-init.sh)
 echo -e "\e[32mEmby account save success , username:emby ,password:emby\e[0m"
