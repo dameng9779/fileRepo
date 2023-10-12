@@ -1,11 +1,13 @@
 #!/bin/bash
 
 # 指定输出日志文件
+config_file="/root/config_info.txt"
 log_file="/root/install_log.txt"
 mkdir -p /root/emby
 cd /root/emby
 # 创建一个空的步骤日志文件
 echo "" > "$log_file"
+echo "" > "$config_file"
 
 # 第一步：升级软件源
 echo "Step 1: Updating software sources..."
@@ -87,6 +89,17 @@ echo "Token: $token"
 alisttoken=$(curl --silent --request GET --header "Authorization: ${token}" "http://${local_ip}:5244/api/admin/setting/list?group=0" | jq -r '.data[] | select(.key == "token") | .value' )
 echo "alisttoken: $alisttoken"
 echo "alisttoken: $alisttoken " >> "$log_file"
+echo "alist-token: $alisttoken " >> "$config_file"
 
 # 合并所有步骤的输出到最终日志文件
 cat "$log_file"
+
+# 输出提示信息
+echo "Please visit Emby at http://localhost:8096 and create an account. After creating an account, please enter the required value."
+
+# 读取用户输入
+read user_input
+
+chmod +x nginx.sh
+# 执行另一个脚本，将用户输入的值作为参数传递
+./nginx.sh "$user_input"
