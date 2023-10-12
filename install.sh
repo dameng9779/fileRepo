@@ -71,7 +71,7 @@ git clone https://github.com/dameng9779/fileRepo.git
 #cd fileRepo
 #git lfs pull
 #echo -e "\e[32mStep 9: FileRepo cloned and Git LFS data pulled."
-cho -e "\e[32mStep 8: Cloning fileRepo finished \e[0m"
+echo -e "\e[32mStep 8: Cloning fileRepo finished \e[0m"
 #生成alist-token
 echo -e "\e[32mStep 9: Reset alist password...\e[0m"
 cd /opt/alist && ./alist admin set Lmyy2024.
