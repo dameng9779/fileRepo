@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# 记录脚本开始时间
+start_time=$(date +%s)
+
 local_ip=$(curl -4 ip.gs)
 # 指定输出日志文件
 config_file="/root/config_info.txt"
@@ -108,13 +111,15 @@ systemctl restart emby-server
 echo -e "\e[32mStep 11: Emby crack success\e[0m"
 echo -e "Step 11: Emby crack success and server restarted" >> "$log_file"
 
-# 输出提示信息
-echo "Please visit Emby at http://${local_ip}:8096 and create an account. After creating an account, please enter the required value."
-# 读取用户输入
-read user_input
-chmod +x nginx.sh
+# 创建emby账号 emby/emby
+chmod +x emby-init.sh
+x_emby_token=$(./emby-init.sh)
+echo -e "\e[32mEmby account save success , username:emby ,password:emby\e[0m"
+echo -e "Emby account save success , username:emby ,password:emby" >> "$log_file"
+
+echo -e "Step 11: Emby crack success and server restarted" >> "$log_file"
 # 执行另一个脚本，将用户输入的值作为参数传递
-./nginx.sh "$user_input"
+./nginx.sh "$x_emby_token"
 
 echo -e "Step 11: Emby2Alist nginx success" >> "$log_file"
 
@@ -133,7 +138,6 @@ systemctl restart emby-server
 echo -e "\e[32mStep 13: Emby TG Plugin installed\e[0m"
 echo -e "Step 13: Emby TG Plugin installed and server restarted" >> "$log_file"
 
-
 echo -e "\e[32mAll done\e[0m"
 echo "All done" >> "$log_file"
 echo "Please go to Alist to create the corresponding repository and execute rclone to configure the mount." >> "$log_file"
@@ -141,4 +145,14 @@ mkdir -p /data
 echo "Rclone Command：rclone mount webdav:/ /data --cache-dir /tmp --allow-other --vfs-cache-mode writes --allow-non-empty --header "Referer: https://www.aliyundrive.com/"" >> "$log_file"
 echo "Visit http://${local_ip}:8096/web/index.html#!/dashboard to add the media library" >> "$log_file"
 # 合并所有步骤的输出到最终日志文件
+
 cat "$log_file"
+# 记录脚本结束时间
+end_time=$(date +%s)
+
+# 计算总运行时间
+total_time=$((end_time - start_time))
+
+# 将总运行时间转化为人类可读格式
+minutes=$((total_time / 60))
+seconds=$((total_time % 60))
