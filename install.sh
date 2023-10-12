@@ -67,6 +67,7 @@ echo "Step 7: rclone Server installed. Access it at rclone config." >> "$log_fil
 
 # 克隆文件存储库 备份 可选
 echo -e "\e[32mStep 8: Cloning fileRepo...\e[0m"
+cd /root/emby
 git clone https://github.com/dameng9779/fileRepo.git
 #cd fileRepo
 #git lfs pull
