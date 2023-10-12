@@ -106,7 +106,6 @@ cd /root/emby/fileRepo
 echo -e "\e[32mStep 9: Emby crack...\e[0m"
 #替换emby-crack破解emby
 cp -r /root/emby/fileRepo/embyserver_4_7_14_0_native_auth/* /opt/emby-server/system
-systemctl restart emby-server
 echo -e "\e[32mStep 9: Emby crack success\e[0m"
 echo -e "Step 9: Emby crack success and server restarted" >> "$log_file"
 
@@ -170,4 +169,5 @@ total_time=$((end_time - start_time))
 # 将总运行时间转化为人类可读格式
 minutes=$((total_time / 60))
 seconds=$((total_time % 60))
-echo -e "\e[32m总共耗时${minutes}分${seconds}秒\e[0m"
+systemctl restart emby-server
+echo -e "\e[32mEmby重启中总共耗时${minutes}分${seconds}秒\e[0m"
