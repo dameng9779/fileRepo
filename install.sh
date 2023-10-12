@@ -103,3 +103,6 @@ read user_input
 chmod +x nginx.sh
 # 执行另一个脚本，将用户输入的值作为参数传递
 ./nginx.sh "$user_input"
+# 美化
+chmod +x beautify.sh
+./beautify.sh
