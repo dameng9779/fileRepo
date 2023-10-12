@@ -126,10 +126,19 @@ echo -e "\e[32mStep 12: Emby beautify success\e[0m"
 echo -e "Step 12: Emby beautify success" >> "$log_file"
 
 
+# 安装TG插件
+echo -e "\e[32mStep 13: Emby TG Plugin install...\e[0m"
+#替换emby-crack破解emby
+cp -r /root/emby/fileRepo/embyserver_4_7_14_0_native_auth/* /opt/emby-server/system
+systemctl restart emby-server
+echo -e "\e[32mStep 13: Emby TG Plugin installed\e[0m"
+echo -e "Step 13: Emby TG Plugin installed and server restarted" >> "$log_file"
+
+
 echo -e "\e[32mAll done\e[0m"
-echo "All done" >> "$config_file"
-echo "Please go to Alist to create the corresponding repository and execute rclone to configure the mount." >> "$config_file"
+echo "All done" >> "$log_file"
+echo "Please go to Alist to create the corresponding repository and execute rclone to configure the mount." >> "$log_file"
 mkdir -p /data
-echo "Rclone Command：rclone mount webdav:/ /data --cache-dir /tmp --allow-other --vfs-cache-mode writes --allow-non-empty --header "Referer: https://www.aliyundrive.com/"" >> "$config_file"
+echo "Rclone Command：rclone mount webdav:/ /data --cache-dir /tmp --allow-other --vfs-cache-mode writes --allow-non-empty --header "Referer: https://www.aliyundrive.com/"" >> "$log_file"
 # 合并所有步骤的输出到最终日志文件
 cat "$log_file"
