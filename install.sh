@@ -92,10 +92,6 @@ echo "alisttoken: $alisttoken " >> "$log_file"
 echo "alist-token: $alisttoken " >> "$config_file"
 
 
-
-# 输出提示信息
-echo "Please visit Emby at http://localhost:8096 and create an account. After creating an account, please enter the required value."
-
 cd /root/emby/fileRepo
 
 
@@ -103,7 +99,8 @@ cd /root/emby/fileRepo
 cp -r /root/emby/fileRepo/embyserver_4_7_14_0_native_auth/* /opt/emby-server/system
 systemctl restart emby-server
 
-
+# 输出提示信息
+echo "Please visit Emby at http://localhost:8096 and create an account. After creating an account, please enter the required value."
 # 读取用户输入
 read user_input
 chmod +x nginx.sh
@@ -116,6 +113,8 @@ chmod +x beautify.sh
 ./beautify.sh
 
 echo "All done" >> "$config_file"
-
+echo "Please go to Alist to create the corresponding repository and execute rclone to configure the mount." >> "$config_file"
+mkdir -p /data
+echo "Rclone Command：rclone mount webdav:/ /data --cache-dir /tmp --allow-other --vfs-cache-mode writes --allow-non-empty --header "Referer: https://www.aliyundrive.com/"" >> "$config_file"
 # 合并所有步骤的输出到最终日志文件
 cat "$log_file"
