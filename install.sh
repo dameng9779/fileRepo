@@ -146,18 +146,14 @@ fi
 
 
 chmod +x emby-init.sh
-
-x_emby_token=$(./emby-init.sh)
-echo "x_emby_token: $x_emby_token"
-x_emby_token1=$(echo "$x_emby_token" | sed 's/{}//g')
-echo "x_emby_token1: $x_emby_token1"
+./emby-init.sh
 echo -e "\e[32mEmby account save success , username:emby ,password:emby\e[0m"
 echo -e "Emby account save success , username:emby ,password:emby" >> "$log_file"
 
 echo -e "Step 11: Emby crack success and server restarted" >> "$log_file"
 # 执行nginx脚本
 chmod +x ./nginx.sh
-./nginx.sh "$x_emby_token"
+./nginx.sh 
 
 echo -e "Step 12: Emby2Alist nginx success" >> "$log_file"
 
