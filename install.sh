@@ -1,5 +1,6 @@
 #!/bin/bash
 
+local_ip=$(curl -4 ip.gs)
 # 指定输出日志文件
 config_file="/root/config_info.txt"
 log_file="/root/install_log.txt"
@@ -46,17 +47,17 @@ echo "Step 3: Docker installed." >> "$log_file"
 echo -e "\e[32mStep 5: Installing Emby...\e[0m"
 wget https://github.com/MediaBrowser/Emby.Releases/releases/download/4.7.14.0/emby-server-deb_4.7.14.0_amd64.deb
 dpkg -i emby-server-deb_4.7.14.0_amd64.deb
-echo -e "\e[32mStep 5: Emby Server installed. Access it at http://localhost:8096.\e[0m"
+echo -e "\e[32mStep 5: Emby Server installed. Access it at http://${local_ip}:8096.\e[0m"
 # 保存步骤输出到步骤日志文件
-echo "Step 5: Emby Server installed. Access it at http://localhost:8096." >> "$log_file"
+echo "Step 5: Emby Server installed. Access it at http://${local_ip}:8096." >> "$log_file"
 
 # 第三步：安装 Alist
 echo -e "\e[32mStep 6: Installing Alist...\e[0m"
 curl -fsSL "https://alist.nn.ci/v3.sh" | bash -s install
 cd /opt/alist && ./alist admin set Lmyy2024.
-echo -e "\e[32mStep 6: Alist Server installed. Access it at http://localhost:5244.\e[0m"
+echo -e "\e[32mStep 6: Alist Server installed. Access it at http://${local_ip}:5244.\e[0m"
 # 保存步骤输出到步骤日志文件
-echo "Step 6: Alist Server installed. Access it at http://localhost:5244." >> "$log_file"
+echo "Step 6: Alist Server installed. Access it at http://${local_ip}:5244." >> "$log_file"
 
 # 第四步：安装 rclone
 echo -e "\e[32mStep 7: Installing rclone...\e[0m"
@@ -76,7 +77,6 @@ echo -e "\e[32mStep 8: Cloning fileRepo finished \e[0m"
 #生成alist-token
 echo -e "\e[32mStep 9: Reset alist password...\e[0m"
 cd /opt/alist && ./alist admin set Lmyy2024.
-local_ip=$(curl -4 ip.gs)
 # 构建请求JSON数据
 request_data='{
   "username": "admin",
@@ -109,7 +109,7 @@ echo -e "\e[32mStep 11: Emby crack success\e[0m"
 echo -e "Step 11: Emby crack success and server restarted" >> "$log_file"
 
 # 输出提示信息
-echo "Please visit Emby at http://localhost:8096 and create an account. After creating an account, please enter the required value."
+echo "Please visit Emby at http://${local_ip}:8096 and create an account. After creating an account, please enter the required value."
 # 读取用户输入
 read user_input
 chmod +x nginx.sh
@@ -139,5 +139,6 @@ echo "All done" >> "$log_file"
 echo "Please go to Alist to create the corresponding repository and execute rclone to configure the mount." >> "$log_file"
 mkdir -p /data
 echo "Rclone Command：rclone mount webdav:/ /data --cache-dir /tmp --allow-other --vfs-cache-mode writes --allow-non-empty --header "Referer: https://www.aliyundrive.com/"" >> "$log_file"
+echo "Visit http://${local_ip}:8096/web/index.html#!/dashboard to add the media library" >> "$log_file"
 # 合并所有步骤的输出到最终日志文件
 cat "$log_file"
