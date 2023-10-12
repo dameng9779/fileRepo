@@ -20,8 +20,8 @@ response=$(curl --silent --request GET --url "http://${local_ip}:8096/emby/Auth/
 emby_key=$(echo "$response" | jq -r '.Items[] | select(.AppName == "emby") | .AccessToken')
 
 # 输出AccessToken
-
-echo "AccessToken: $emby_key"
+echo "GetKeyResponse: $response"
+echo "emby-key: $emby_key"
 echo "emby-key: $emby_key" >> "$config_file"
 
 
