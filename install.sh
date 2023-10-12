@@ -1,5 +1,8 @@
 #!/bin/bash
-ufw disable
+# 开放端口
+sudo ufw allow 80,443,8096,8095,5244/tcp
+sudo ufw enable
+
 # 记录脚本开始时间
 start_time=$(date +%s)
 
