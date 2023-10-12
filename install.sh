@@ -149,7 +149,7 @@ chmod +x emby-init.sh
 
 x_emby_token=$(./emby-init.sh)
 echo "x_emby_token: $x_emby_token"
-x_emby_token1=$(awk -F' ' '{print $2}' <<< "$x_emby_token")
+x_emby_token1=$(echo "$x_emby_token" | sed 's/{}//g')
 echo "x_emby_token1: $x_emby_token1"
 echo -e "\e[32mEmby account save success , username:emby ,password:emby\e[0m"
 echo -e "Emby account save success , username:emby ,password:emby" >> "$log_file"
