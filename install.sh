@@ -119,6 +119,7 @@ echo -e "Emby account save success , username:emby ,password:emby" >> "$log_file
 
 echo -e "Step 11: Emby crack success and server restarted" >> "$log_file"
 # 执行另一个脚本，将用户输入的值作为参数传递
+chmod +x ./nginx.sh
 ./nginx.sh "$x_emby_token"
 
 echo -e "Step 11: Emby2Alist nginx success" >> "$log_file"
@@ -156,3 +157,4 @@ total_time=$((end_time - start_time))
 # 将总运行时间转化为人类可读格式
 minutes=$((total_time / 60))
 seconds=$((total_time % 60))
+echo -e "\e[32m总共耗时${minutes}分${seconds}秒\e[0m"
