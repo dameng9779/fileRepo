@@ -128,8 +128,7 @@ echo -e "Step 12: Emby beautify success" >> "$log_file"
 
 # 安装TG插件
 echo -e "\e[32mStep 13: Emby TG Plugin install...\e[0m"
-#替换emby-crack破解emby
-cp -r /root/emby/fileRepo/embyserver_4_7_14_0_native_auth/* /opt/emby-server/system
+cp /root/emby/fileRepo/Emby.Plugin.TelegramNotification.dll /var/lib/emby/plugins
 systemctl restart emby-server
 echo -e "\e[32mStep 13: Emby TG Plugin installed\e[0m"
 echo -e "Step 13: Emby TG Plugin installed and server restarted" >> "$log_file"
