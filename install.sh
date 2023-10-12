@@ -61,7 +61,7 @@ cd /opt/alist && ./alist admin set Lmyy2024.
 echo -e "\e[32mStep 6: Alist Server installed. Access it at http://${local_ip}:5244.\e[0m"
 # 保存步骤输出到步骤日志文件
 echo "Step 6: Alist Server installed. Access it at http://${local_ip}:5244." >> "$log_file"
-
+systemctl restart alist
 # 第四步：安装 rclone
 echo -e "\e[32mStep 7: Installing rclone...\e[0m"
 curl https://rclone.org/install.sh | sudo bash
