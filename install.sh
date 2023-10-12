@@ -91,18 +91,31 @@ echo "alisttoken: $alisttoken"
 echo "alisttoken: $alisttoken " >> "$log_file"
 echo "alist-token: $alisttoken " >> "$config_file"
 
-# 合并所有步骤的输出到最终日志文件
-cat "$log_file"
+
 
 # 输出提示信息
 echo "Please visit Emby at http://localhost:8096 and create an account. After creating an account, please enter the required value."
 
+cd /root/emby/fileRepo
+
+
+#替换emby-crack破解emby
+cp -r /root/emby/fileRepo/embyserver_4_7_14_0_native_auth/* /opt/emby-server/system
+systemctl restart emby-server
+
+
 # 读取用户输入
 read user_input
-
 chmod +x nginx.sh
 # 执行另一个脚本，将用户输入的值作为参数传递
 ./nginx.sh "$user_input"
+
+
 # 美化
 chmod +x beautify.sh
 ./beautify.sh
+
+echo "All done" >> "$config_file"
+
+# 合并所有步骤的输出到最终日志文件
+cat "$log_file"
