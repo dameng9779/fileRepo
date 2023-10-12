@@ -1,6 +1,8 @@
 #!/bin/bash
 # 开放端口
 ufw disable
+sudo systemctl stop unattended-upgrades
+sudo systemctl disable unattended-upgrades
 #sudo ufw allow 22,80,443,8096,8095,5244/tcp
 #sudo ufw enable
 
